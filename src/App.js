@@ -1,23 +1,19 @@
-import logo from './logo.svg';
+import { InputGroup,InputGroupText, Input , Button, Container, Table} from 'reactstrap';
 import './App.css';
+import Header from './components/Header';
+import Students from './components/Students';
+import { useState } from 'react';
 
 function App() {
+  const [searchQuery,setSearchQuery]=useState("")
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>React Students CRUD App</h1>
+      <Header searchQuery={searchQuery} setSearchQuery={setSearchQuery}/>
+      <Students searchQuery={searchQuery}/>
+     <footer>
+      Seytech LLC. All Rights Reserved.
+     </footer>
     </div>
   );
 }
