@@ -1,31 +1,48 @@
-import React, { useState } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import React, { useState } from "react";
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import DeleteModal from "./modalForms/DeleteModal";
+import InfoModal from "./modalForms/InfoModal";
+import AddStudentsModal from "./modalForms/AddStudentsModal";
+import EditModal from "./modalForms/EditModal";
 
-function AddModal({modal,toggle,handleStudentDelete, stId}) {
-//   const [modal, setModal] = useState(false);
+function AddModal({
+  modal,
+  toggle,
+  handleStudentDelete,
+  stId,
+  modalAction,
+  student,
+  handleStudentAdd,
+  handleStudentEdit,
+}) {
+  //   const [modal, setModal] = useState(false);
 
-//   const toggle = () => setModal(!modal);
+  //   const toggle = () => setModal(!modal);
 
   return (
     <div>
-      <Button color="danger" onClick={toggle}>
-        Click Me
-      </Button>
       <Modal isOpen={modal} toggle={toggle}>
-        <ModalHeader toggle={toggle}>Modal title</ModalHeader>
-        <ModalBody>
-Are you sure you wanna delete this student?
-        </ModalBody>
-        <ModalFooter>
-          <Button color="danger" onClick={()=>{
-            handleStudentDelete(stId);toggle()
-          }}>
-            Delete
-          </Button>
-          <Button color="secondary" onClick={toggle}>
-            Cancel
-          </Button>
-        </ModalFooter>
+        {modalAction === "delete" && (
+          <DeleteModal
+            handleStudentDelete={handleStudentDelete}
+            toggle={toggle}
+            stId={stId}
+          />
+        )}
+        {modalAction === "add" && (
+          <AddStudentsModal
+            toggle={toggle}
+            handleStudentAdd={handleStudentAdd}
+          />
+        )}
+        {modalAction === "edit" && (
+          <EditModal
+            student={student}
+            toggle={toggle}
+            handleStudentEdit={handleStudentEdit}
+          />
+        )}
+        {modalAction === "info" && <InfoModal {...student} toggle={toggle} />}
       </Modal>
     </div>
   );
